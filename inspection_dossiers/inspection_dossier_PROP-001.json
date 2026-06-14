@@ -1,0 +1,15 @@
+{
+    "dossier_type": "PROPERTY_INSPECTION_DOSSIER",
+    "generated_at": "2026-05-31T09:51:44.661639+00:00",
+    "property": {
+        "property_id": "PROP-001"
+    },
+    "inspection_count": 1,
+    "inspections": [
+        {
+            "property_id": "PROP-001",
+            "event_type": "PROPERTY_INSPECTION"
+        }
+    ],
+    "status": "DOSSIER_GENERATED"
+}

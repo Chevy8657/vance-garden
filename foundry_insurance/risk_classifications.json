@@ -1,0 +1,7 @@
+{
+    "RISK-PROP-001": {
+        "classification_id": "RISK-PROP-001",
+        "risk_score": 95,
+        "risk_band": "LOW"
+    }
+}

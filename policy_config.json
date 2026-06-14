@@ -1,0 +1,28 @@
+{
+    "policies": {
+        "REPLAY_LIMIT": {
+            "trigger_metric": "REPLAY_BLOCKED",
+            "threshold": 3,
+            "consequence": "SUSPENDED",
+            "reason": "Repeated replay attack threshold breached."
+        },
+        "MUTATION_LIMIT": {
+            "trigger_metric": "HASH_MUTATION_BLOCKED",
+            "threshold": 1,
+            "consequence": "SUSPENDED",
+            "reason": "Immediate zero-tolerance isolation for data tampering."
+        },
+        "DRIFT_LIMIT": {
+            "trigger_metric": "DRIFT_HOURS",
+            "threshold": 168.0,
+            "consequence": "QUARANTINED",
+            "reason": "Temporal gap requires manual operator clearance."
+        },
+        "PROMOTION_TIER": {
+            "trigger_metric": "ACCEPTED",
+            "threshold": 100,
+            "consequence": "ELEVATED_TRUST",
+            "reason": "Extended clean operational sequence."
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ away.title }}</h1>
+
+<div class="card">
+    <div class="label">{{ away.protected_period }}</div>
+    <h2>{{ away.decisions_required }} Decisions Require Review</h2>
+    <p class="statement">{{ away.message }}</p>
+    <a class="button" href="/plans">Review Prepared Plans</a>
+</div>
+
+<div class="grid">
+    <div class="card">
+        <div class="label">Items Reviewed</div>
+        <div class="metric">{{ away.items_reviewed }}</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Communications Categorized</div>
+        <div class="metric">{{ away.communications_categorized }}</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Administrative Requests Prepared</div>
+        <div class="metric">{{ away.admin_requests_prepared }}</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Calendar Intrusions Prevented</div>
+        <div class="metric">{{ away.calendar_intrusions_prevented }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="label">Estimated Catch-Up Time</div>
+    <div class="metric">{{ away.estimated_catchup_time_minutes }} min</div>
+    <p class="small">VANCE organizes the pile so the user returns to a short review queue instead of chaos.</p>
+</div>
+{% endblock %}

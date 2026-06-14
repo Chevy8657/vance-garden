@@ -1,0 +1,10 @@
+[
+    {
+        "verification_id": "OCC-89DA0282",
+        "property_id": "PROP-001",
+        "occupancy_status": "OCCUPIED",
+        "verified_by": "MANAGER-001",
+        "verified_at": "2026-05-31T09:58:54.634926+00:00",
+        "verification_hash": "fbc4a3090d6244fa89513d8a18b35751"
+    }
+]

@@ -1,0 +1,13 @@
+{
+    "report_id": "PET-RPT-ALPHA001",
+    "generated_at": "2026-05-29T19:00:50.102737+00:00",
+    "node_id": "B-MOTHERSHIP",
+    "total_nodes_evaluated": 10,
+    "primary_baseline_count": 8,
+    "makeup_pool_count": 1,
+    "rejected_count": 1,
+    "cpi_score": 7.5,
+    "efficiency_yield": 80.0,
+    "observations": "High architectural discipline observed. Local node network achieved baseline stabilization.",
+    "recommendation": "Authorize full local-first node production state immediately."
+}

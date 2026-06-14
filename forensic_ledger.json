@@ -1,0 +1,23 @@
+[
+    {
+        "timestamp": "2026-05-30T00:30:56.640482+00:00",
+        "event_type": "SECURITY_HANDSHAKE_DENIED",
+        "details": "Rogue instance NODE-999 detected",
+        "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "273de0da97c47c029e47d317c13b62287ffcac5b6e1899a3ec6ae97c0d5a0f9b"
+    },
+    {
+        "timestamp": "2026-05-30T00:30:56.641029+00:00",
+        "event_type": "SYSTEM_CONFIG_MUTATION",
+        "details": "REFERRAL_FEE_LOGIC updated to 10-to-Zero",
+        "prev_hash": "273de0da97c47c029e47d317c13b62287ffcac5b6e1899a3ec6ae97c0d5a0f9b",
+        "hash": "3f09e7c573c39fc700f088e132a864992a4587414875f65c501818c4633ff235"
+    },
+    {
+        "timestamp": "2026-05-30T00:30:56.641523+00:00",
+        "event_type": "INTEGRITY_AUDIT_PASS",
+        "details": "Baseline signature verified",
+        "prev_hash": "3f09e7c573c39fc700f088e132a864992a4587414875f65c501818c4633ff235",
+        "hash": "6bffe59f6925d77c4abbf9612c7173d059058cd0028abd7380d784c9cb1d1d9a"
+    }
+]

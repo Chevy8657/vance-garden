@@ -1,0 +1,7 @@
+{
+    "CAR-001": {
+        "carrier_id": "CAR-001",
+        "carrier_name": "Example Carrier",
+        "status": "ACTIVE"
+    }
+}

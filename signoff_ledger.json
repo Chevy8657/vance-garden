@@ -1,0 +1,17 @@
+{
+    "incident_id": "REC-2026-00014",
+    "incident_type": "RECONCILIATION_INCIDENT",
+    "pre_signoff_dossier_hash": "a1b2c3d4e5f6...",
+    "manager_note": "Reviewed divergence and confirmed trusted chain alignment.",
+    "authorized_agent": {
+        "id": "RM-001",
+        "role": "PROPERTY_MANAGER",
+        "authority_scope": [
+            "RECONCILIATION_INCIDENT",
+            "MAINTENANCE_EXCEPTION",
+            "OCCUPANCY_VERIFICATION"
+        ]
+    },
+    "final_case_status": "CLOSED_ATTESTED",
+    "manager_attestation_hash": "2ec533aae8da3fee39b113dc489bde3b32414acf7783f8293e6a91ccc73e49bf"
+}

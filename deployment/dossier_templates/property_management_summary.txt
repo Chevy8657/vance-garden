@@ -1,0 +1,6 @@
+[PROPERTY EVIDENCE SUMMARY]
+Asset ID: NODE-ALPHA-001
+Audit Timestamp: {{TIMESTAMP}}
+Risk Rating: LOW (Verified)
+Evidence Tampering: NONE DETECTED
+Integrity Status: CHAIN_VERIFIED

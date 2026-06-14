@@ -1,0 +1,2 @@
+{"office_name": "Foundry District Bravo", "office_status": "PROVISIONING", "readiness_score": 78, "annual_impact": 512000.0, "recommendation": "Infrastructure Hardware Upgrade Required", "notes": "Main electrical breaker requires a 400 AMP split.", "timestamp": "2026-06-05T19:17:36.263480"}
+{"office_name": "Boutique Pod Zero", "office_status": "ONLINE", "readiness_score": 99, "annual_impact": 125000.0, "recommendation": "Deploy Node Stack Tier-1", "notes": "Fiber connection verified; local local-first sync complete.", "timestamp": "2026-06-05T19:17:36.275490"}

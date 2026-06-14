@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Action Prepared Center</h1>
+<p class="statement">VANCE prepares recommended actions. The broker stays in control.</p>
+
+{% for action in action_packs %}
+<div class="card">
+    <div class="label">{{ action.ipe }}</div>
+    <h2>{{ action.title }}</h2>
+    <p>{{ action.summary }}</p>
+
+    <p><strong>Priority:</strong>
+        <span class="status-{{ action.priority }}">{{ action.priority|upper }}</span>
+    </p>
+
+    <p><strong>Monthly Capacity Goal Per User:</strong>
+        {{ action.expected_impact.monthly_capacity_goal_per_user_hours }} hours
+    </p>
+
+    <p><strong>Primary Outcome:</strong> {{ action.expected_impact.primary_outcome }}</p>
+    <p><strong>Review Time:</strong> {{ action.review_time_minutes }} minutes</p>
+
+    <a class="button" href="/actions/{{ action.id }}">Review & Approve</a>
+</div>
+{% endfor %}
+{% endblock %}

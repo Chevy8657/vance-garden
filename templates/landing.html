@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VANCE // Garden Access</title>
+    <style>
+        body { background:#0d0d0d; color:#e8e8e8; font-family:Arial,sans-serif; max-width:900px; margin:0 auto; padding:40px 22px; }
+        h1 { font-size:48px; color:white; }
+        h2, h3 { color:white; }
+        p { line-height:1.6; color:#cfcfcf; }
+        .hero { text-align:center; padding:50px 0; }
+        .btn { display:inline-block; background:white; color:#0d0d0d; padding:14px 22px; border-radius:8px; text-decoration:none; font-weight:800; border:none; cursor:pointer; }
+        .card { border:1px solid #333; background:#151515; border-radius:14px; padding:26px; margin:24px 0; }
+        .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+        .metric { font-size:34px; font-weight:800; color:white; }
+        label { display:block; margin:14px 0 6px; font-weight:700; color:#aaa; }
+        input { width:100%; padding:12px; background:#1d1d1d; border:1px solid #444; color:white; border-radius:8px; }
+        .quote { border-left:4px solid #555; padding-left:18px; font-style:italic; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Never Come Back To A Pile Of Work Again.</h1>
+        <p>VANCE finds items needing attention, prepares action plans, and organizes work for review while you focus on clients.</p>
+        <a class="btn" href="#join">Start Free Garden Access</a>
+    </div>
+
+    <div class="card">
+        <h3>While You Were Away</h3>
+        <div class="grid">
+            <div><div class="metric">43</div><p>Communications organized</p></div>
+            <div><div class="metric">9</div><p>Interruptions prevented</p></div>
+            <div><div class="metric">3</div><p>Decisions require review</p></div>
+            <div><div class="metric">7 min</div><p>Estimated catch-up time</p></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>How VANCE Works</h3>
+        <p>1. Finds items needing attention</p>
+        <p>2. Prepares action plans</p>
+        <p>3. You review, approve, or modify</p>
+        <p>4. VANCE tracks results in Change Manager</p>
+    </div>
+
+    <div class="card">
+        <h3>Garden Access</h3>
+        <p><strong>Free.</strong> Up to 40 monthly capacity goal hours per user.</p>
+        <p>Built for people who want less waste, simpler required work, and more time for value-added activity.</p>
+    </div>
+
+    <div class="quote">
+        <p>"I didn't understand what Rick was building. Now I can explain it. It saves you money and improves your business."</p>
+        <p>— Kimberly</p>
+    </div>
+
+    <div id="join" class="card">
+        <h3>Request Garden Access</h3>
+        <form action="/request-access" method="POST">
+            <label>Name</label>
+            <input name="name" required>
+
+            <label>Company / Brokerage</label>
+            <input name="company" required>
+
+            <label>Role</label>
+            <input name="role" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <br><br>
+            <button class="btn" type="submit">Join Garden Access Queue</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+    "CPL-001": {
+        "link_id": "CPL-001",
+        "carrier_id": "CAR-001",
+        "property_id": "PROP-001",
+        "status": "ACTIVE"
+    }
+}

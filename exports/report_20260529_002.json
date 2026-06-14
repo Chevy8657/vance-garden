@@ -1,0 +1,10 @@
+{
+  "report_id": "REP-20260529-X02",
+  "generated_at": "2026-05-29T15:10:00Z",
+  "cpi_score": 62.1,
+  "efficiency_yield": 41.8,
+  "risk_level": "HIGH",
+  "assessment_type": "INFRASTRUCTURE_STRESS",
+  "brokerage_id": "BRK-TEXAS-HQ",
+  "summary": "High latency detected on local node peer discovery emulation."
+}

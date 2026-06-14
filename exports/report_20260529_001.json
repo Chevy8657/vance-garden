@@ -1,0 +1,10 @@
+{
+  "report_id": "REP-20260529-X01",
+  "generated_at": "2026-05-29T14:20:00Z",
+  "cpi_score": 88.5,
+  "efficiency_yield": 14.2,
+  "risk_level": "LOW",
+  "assessment_type": "PROCESS_AUDIT",
+  "brokerage_id": "BRK-NEVADA-MAIN",
+  "summary": "Automated workflow compression reduced escrow ingestion overhead."
+}

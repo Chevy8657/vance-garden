@@ -1,0 +1,11 @@
+[
+    {
+        "packet_id": "PKT-TX-101",
+        "origin_node": "NODE-ALPHA-001",
+        "routing_context": null,
+        "payload_type": "STATE_UPDATE_RECORD",
+        "body": "{\"broker_id\": \"BRK-9921\", \"event_type\": \"escrow_contract_signed\", \"internal_event_type\": \"STATE_UPDATE_RECORD\", \"payload_hash\": \"6673f05c07f5ebe9b5a1a0970783589e5d0d600964ccd0619662800d5a73af85\", \"property_id\": \"PROP-NEVADA-88211\", \"raw_payload_reference\": {\"agreed_reduction_logic\": \"10-to-Zero hook\", \"client_type\": \"high-trust operational partner\", \"escrow_agent\": \"Joy Grimmer\"}, \"routing_context\": \"REGISTRY-BRK-9921\", \"source_system\": \"KW_MegaCamp_Ingest_2026\", \"timestamp\": \"2026-05-29T23:15:00Z\"}",
+        "committed_at": "2026-05-29T23:25:19.308032+00:00",
+        "archived_at": "2026-05-29T23:47:44.376155+00:00"
+    }
+]

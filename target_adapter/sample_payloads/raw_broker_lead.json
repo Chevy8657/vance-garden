@@ -1,0 +1,12 @@
+{
+    "originating_platform": "KW_MegaCamp_Ingest_2026",
+    "action_name": "escrow_contract_signed",
+    "operator_identifier": "BRK-9921",
+    "asset_num": "PROP-NEVADA-88211",
+    "event_time_iso": "2026-05-29T23:15:00Z",
+    "meta_payload": {
+        "client_type": "high-trust operational partner",
+        "agreed_reduction_logic": "10-to-Zero hook",
+        "escrow_agent": "Joy Grimmer"
+    }
+}

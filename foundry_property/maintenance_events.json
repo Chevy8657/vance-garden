@@ -1,0 +1,11 @@
+[
+    {
+        "maintenance_id": "MAINT-7898FCB3",
+        "property_id": "PROP-001",
+        "opened_at": "2026-05-31T09:54:42.860021+00:00",
+        "description": "Fix leaky faucet in Unit 4B",
+        "priority": "URGENT",
+        "status": "OPEN",
+        "created_by": "MANAGER-001"
+    }
+]

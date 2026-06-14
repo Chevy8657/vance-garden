@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Action Approved</h1>
+
+<div class="card">
+    <div class="label">Approval Decision</div>
+    <h2>{{ decision.decision|upper }}</h2>
+    <p><strong>Decision ID:</strong> {{ decision.id }}</p>
+    <p><strong>Action Pack:</strong> {{ decision.action_pack_id }}</p>
+    <p><strong>Approved By:</strong> {{ decision.approved_by }}</p>
+    <p><strong>Notes:</strong> {{ decision.notes }}</p>
+    <p><strong>Created At:</strong> {{ decision.created_at }}</p>
+</div>
+
+<div class="card">
+    <div class="label">VANCE Status</div>
+    <p class="statement">
+        Action has been approved. VANCE will now track capacity returned, monitor progress,
+        and keep the broker informed through the Capacity Ledger.
+    </p>
+    <a class="button" href="/capacity">View Capacity Ledger</a>
+    <a class="button" href="/dashboard">Return to Dashboard</a>
+</div>
+{% endblock %}

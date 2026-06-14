@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Clients</title>
+<style>
+body{background:#111;color:#fff;font-family:monospace;padding:30px;}
+h1{letter-spacing:2px;}
+a{color:#67e8f9;}
+.card{border:1px solid #555;border-radius:8px;padding:18px;margin-bottom:16px;color:#fff;}
+.card:hover{border-color:#22c55e;background:#181818;}
+.card-link{text-decoration:none;}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px;}
+.metric{color:#22c55e;font-weight:bold;}
+.warning{color:#fbbf24;font-weight:bold;}
+.small{color:#aaa;font-size:12px;text-transform:uppercase;letter-spacing:1px;}
+</style>
+</head>
+<body>
+
+<h1>CLIENT INTELLIGENCE COMMAND CENTER</h1>
+<p><a href="/dashboard">← Back to Executive Brief</a></p>
+
+{% for c in clients %}
+{% set r = c.record %}
+{% set a = c.analysis %}
+
+<a class="card-link" href="/client/{{ r.brokerage_name | urlencode }}">
+<div class="card">
+
+  <h2>{{ r.brokerage_name }}</h2>
+
+  <div class="grid">
+    <div>
+      <div class="small">Volume</div>
+      <div class="metric">${{ "{:,.0f}".format(r.transaction_volume) }}</div>
+    </div>
+
+    <div>
+      <div class="small">GCI</div>
+      <div class="metric">${{ "{:,.0f}".format(r.gci) }}</div>
+    </div>
+
+    <div>
+      <div class="small">Overall IPE</div>
+      <div class="metric">{{ a.overall_ipe }}/100</div>
+    </div>
+
+    <div>
+      <div class="small">Maturity</div>
+      <div class="metric">{{ a.maturity_level }}</div>
+    </div>
+  </div>
+
+  <br>
+
+  <div><b>Weakest Pillar</b></div>
+  <div class="warning">{{ a.weakest_pillar }} — {{ a.weakest_score }}/100</div>
+
+  <br>
+
+  <div><b>VANCE Recommends</b></div>
+  <div>{{ a.recommendation }}</div>
+
+</div>
+</a>
+
+{% endfor %}
+
+</body>
+</html>

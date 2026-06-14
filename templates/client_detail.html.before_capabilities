@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Client Detail</title>
+<style>
+body{background:#111;color:#fff;font-family:monospace;padding:30px;}
+h1,h2{letter-spacing:2px;}
+a{color:#67e8f9;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0;}
+.card{border:1px solid #555;border-radius:8px;padding:18px;margin-bottom:18px;}
+.metric{color:#22c55e;font-weight:bold;font-size:24px;}
+.small{color:#aaa;font-size:12px;text-transform:uppercase;letter-spacing:1px;}
+.warning{color:#fbbf24;font-weight:bold;}
+.bar{height:14px;background:#333;border-radius:99px;margin-top:10px;overflow:hidden;}
+.fill{height:14px;background:#22c55e;border-radius:99px;}
+.item{border-top:1px dashed #555;padding:12px 0;}
+</style>
+</head>
+<body>
+
+<p><a href="/clients">← Back to Clients</a></p>
+
+<h1>{{ client.brokerage_name }}</h1>
+<p>Client Intelligence Dossier</p>
+
+<div class="grid">
+  <div class="card"><div class="small">Volume</div><div class="metric">${{ "{:,.0f}".format(client.transaction_volume) }}</div></div>
+  <div class="card"><div class="small">GCI</div><div class="metric">${{ "{:,.0f}".format(client.gci) }}</div></div>
+  <div class="card"><div class="small">Advisors</div><div class="metric">{{ client.agent_count }}</div></div>
+</div>
+
+<div class="card">
+  <h2>Compliant Node Owner Progress</h2>
+  <div class="grid">
+    <div><div class="small">Current IPE</div><div class="metric">{{ analysis.overall_ipe }}/100</div></div>
+    <div><div class="small">Target IPE</div><div class="metric">{{ analysis.target_ipe }}/100</div></div>
+    <div><div class="small">IPE Gap</div><div class="metric">{{ analysis.ipe_gap }}</div></div>
+  </div>
+  <div class="bar"><div class="fill" style="width:{{ analysis.overall_ipe }}%;"></div></div>
+  <p>Current Level: <b>{{ analysis.maturity_level }}</b></p>
+  <p>Ultimate Goal: <b>Compliant Node Owner</b></p>
+</div>
+
+<div class="card">
+  <h2>VANCE Recommendation</h2>
+  <p class="warning">{{ analysis.recommendation }}</p>
+  <p>Weakest Pillar: {{ analysis.weakest_pillar }} — {{ analysis.weakest_score }}/100</p>
+</div>
+
+<div class="card">
+  <h2>90-Day Client Action Plan</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="small">01 // Days 0-30</div>
+      <ul>{% for item in analysis.action_plan.days_0_30 %}<li>{{ item }}</li>{% endfor %}</ul>
+    </div>
+    <div class="card">
+      <div class="small">02 // Days 31-60</div>
+      <ul>{% for item in analysis.action_plan.days_31_60 %}<li>{{ item }}</li>{% endfor %}</ul>
+    </div>
+    <div class="card">
+      <div class="small">03 // Days 61-90</div>
+      <ul>{% for item in analysis.action_plan.days_61_90 %}<li>{{ item }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>IPE Framework</h2>
+  {% for label, score in analysis.ipe_scores.items() %}
+    <div>{{ label }}: <span class="metric" style="font-size:16px;">{{ score }}</span></div>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <h2>Pain Point</h2>
+  <p>{{ client.pain_point }}</p>
+  <h2>Strategic Goal</h2>
+  <p>{{ client.business_goal }}</p>
+</div>
+
+<div class="card">
+  <h2>Assessment History</h2>
+  <p>Total assessments: {{ assessment_count }}</p>
+  {% for h in history %}
+  <div class="item">
+    <b>{{ h.timestamp }}</b><br>
+    Volume: ${{ "{:,.0f}".format(h.transaction_volume) }} |
+    GCI: ${{ "{:,.0f}".format(h.gci) }} |
+    Advisors: {{ h.agent_count }}
+  </div>
+  {% endfor %}
+</div>
+
+</body>
+</html>

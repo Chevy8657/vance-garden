@@ -1,0 +1,149 @@
+     1	import os
+     2	import json
+     3	from fastapi import FastAPI
+     4	from fastapi.responses import HTMLResponse
+     5	from fastapi.templating import Jinja2Templates
+     6	from fastapi import Request
+     7	from datetime import datetime
+     8	from brokerage_brief import generate_brokerage_analysis
+     9	from brokerage_data import load_brokerage_records
+    10	from client_intelligence import analyze_client_record
+    11	from opportunity_engine import calculate_opportunity
+    12	from proposal_engine import generate_proposal
+    13	from program_tracker import generate_program_tracker
+    14	from verification_engine import generate_verification
+    15	from certification_engine import generate_certification
+    16	from revenue_impact_engine import calculate_revenue_impact
+    17	
+    18	app = FastAPI()
+    19	templates = Jinja2Templates(directory="templates")
+    20	BROKERAGE_LEDGER = "/home/rick/pet_alpha/brokerage_ledger.json"
+    21	
+    22	def get_latest_brokerage_record():
+    23	    if not os.path.exists(BROKERAGE_LEDGER): return {}
+    24	    with open(BROKERAGE_LEDGER, "r") as f:
+    25	        lines = [line.strip() for line in f if line.strip()]
+    26	    return json.loads(lines[-1]) if lines else {}
+    27	
+    28	@app.get("/dashboard", response_class=HTMLResponse)
+    29	async def serve_dashboard(request: Request):
+    30	    latest_record = get_latest_brokerage_record()
+    31	    brokerage_name = latest_record.get("brokerage_name", "Brokerage Partner Node")
+    32	    brief = generate_brokerage_analysis(BROKERAGE_LEDGER)
+    33	
+    34	    return templates.TemplateResponse(
+    35	        request=request,
+    36	        name="dashboard.html",
+    37	        context={
+    38	            "brokerage_name": brokerage_name,
+    39	            "snapshot": brief.get("snapshot", {}),
+    40	            "review": brief.get("review", {}),
+    41	            "strengths": brief.get("strengths", {}),
+    42	            "action_plan": brief.get("action_plan", {}),
+    43	            "debug": brief.get("debug", {}),
+    44	        }
+    45	    )
+    46	
+    47	
+    48	@app.get("/clients", response_class=HTMLResponse)
+    49	async def clients_page(request: Request):
+    50	    records = load_brokerage_records()
+    51	
+    52	    latest_by_client = {}
+    53	    for r in records:
+    54	        name = r.get("brokerage_name", "Unknown Brokerage")
+    55	        latest_by_client[name] = r
+    56	
+    57	    records = list(latest_by_client.values())
+    58	    records.sort(key=lambda x: x.get("brokerage_name", ""))
+    59	
+    60	    enriched_records = []
+    61	    for r in records:
+    62	        enriched_records.append({
+    63	            "record": r,
+    64	            "analysis": analyze_client_record(r)
+    65	        })
+    66	
+    67	    return templates.TemplateResponse(
+    68	        request=request,
+    69	        name="clients.html",
+    70	        context={"clients": enriched_records}
+    71	    )
+    72	
+    73	
+    74	@app.get("/client/{client_name}", response_class=HTMLResponse)
+    75	async def client_detail_page(request: Request, client_name: str):
+    76	    records = load_brokerage_records()
+    77	
+    78	    matches = [
+    79	        r for r in records
+    80	        if r.get("brokerage_name", "").lower() == client_name.lower()
+    81	    ]
+    82	
+    83	    if not matches:
+    84	        return HTMLResponse("<h1>Client not found</h1>", status_code=404)
+    85	
+    86	    latest = matches[-1]
+    87	
+    88	    return templates.TemplateResponse(
+    89	        request=request,
+    90	        name="client_detail.html",
+    91	        context={
+    92	            "client": latest,
+    93	            "history": matches[::-1],
+    94	            "assessment_count": len(matches),
+    95	            "analysis": analyze_client_record(latest),
+    96	            "opportunity": calculate_opportunity(
+    97	                analyze_client_record(latest)
+    98	            ),
+    99	            "proposal": generate_proposal(
+   100	                latest,
+   101	                analyze_client_record(latest),
+   102	                calculate_opportunity(
+   103	                    analyze_client_record(latest)
+   104	                )
+   105	            ),
+   106	            "program": generate_program_tracker(
+   107	                analyze_client_record(latest),
+   108	                generate_proposal(
+   109	                    latest,
+   110	                    analyze_client_record(latest),
+   111	                    calculate_opportunity(
+   112	                        analyze_client_record(latest)
+   113	                    )
+   114	                )
+   115	            ),
+   116	            "verification": generate_verification(
+   117	                generate_program_tracker(
+   118	                    analyze_client_record(latest),
+   119	                    generate_proposal(
+   120	                        latest,
+   121	                        analyze_client_record(latest),
+   122	                        calculate_opportunity(
+   123	                            analyze_client_record(latest)
+   124	                        )
+   125	                    )
+   126	                )
+   127	            ),
+   128	            "certification": generate_certification(
+   129	                analyze_client_record(latest),
+   130	                generate_verification(
+   131	                    generate_program_tracker(
+   132	                        analyze_client_record(latest),
+   133	                        generate_proposal(
+   134	                            latest,
+   135	                            analyze_client_record(latest),
+   136	                            calculate_opportunity(
+   137	                                analyze_client_record(latest)
+   138	                            )
+   139	                        )
+   140	                    )
+   141	                )
+   142	            ),
+   143	            "revenue_impact": calculate_revenue_impact(
+   144	                latest,
+   145	                analyze_client_record(latest),
+   146	                calculate_opportunity(analyze_client_record(latest))
+   147	            )
+   148	        }
+   149	    )

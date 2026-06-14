@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ work.title }}</h1>
+<p class="statement">{{ work.summary }}</p>
+
+<div class="grid-3">
+    {% for category in work.categories %}
+    <div class="card">
+        <div class="label">{{ category.label }}</div>
+        <h2>{{ category.name }}</h2>
+        <div class="metric">{{ category.percent }}%</div>
+        <p><strong>Target:</strong> {{ category.goal }}%</p>
+        <p><strong>VANCE Direction:</strong> {{ category.direction }}</p>
+        <p class="small">{{ category.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Top Non-Value Added Waste Sources</h2>
+
+<div class="card">
+    <ul>
+        {% for source in work.top_waste_sources %}
+        <li>{{ source }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="card">
+    <div class="label">Recommended Next Action</div>
+    <h2>Administrative Drag Reduction Pack</h2>
+    <p class="statement">
+        VANCE recommends attacking non-value added work first by reducing status chasing,
+        duplicate entry, document hunting, rework, and poor coordination.
+    </p>
+    <p><strong>Expected Impact:</strong> +8 Monthly Capacity Goal Hours Per User</p>
+
+    {% if admin_action and admin_action.status == "prepared" %}
+        {% if admin_action and admin_action.status == "prepared" %}
+    {% else %}
+        <a class="button" href="/change">View In Change Manager</a>
+    {% endif %}
+    {% elif admin_action %}
+        <p><strong>Status:</strong> {{ admin_action.status|upper }}</p>
+        <a class="button" href="/change">View In Change Manager</a>
+    {% else %}
+        <a class="button" href="/plans">View Prebuilt Action Plans</a>
+    {% endif %}
+</div>
+
+<div class="card">
+    <div class="label">VANCE Work Doctrine</div>
+    <p class="statement">
+        Find the red work. Simplify the yellow work. Create more room for green work.
+    </p>
+</div>
+{% endblock %}

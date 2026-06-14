@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>GOOD MORNING, TRACY</h1>
+
+<div class="card">
+    <div class="label">{{ morning.title }}</div>
+    <h2>{{ morning.decisions_required }} Decisions Require Review</h2>
+    <p class="statement">{{ morning.message }}</p>
+    <div class="grid">
+        <div><div class="label">Items Reviewed</div><div class="metric">{{ morning.items_reviewed }}</div></div>
+        <div><div class="label">Actions Prepared</div><div class="metric">{{ morning.actions_prepared }}</div></div>
+        <div><div class="label">Opportunities Identified</div><div class="metric">{{ morning.opportunities_identified }}</div></div>
+        <div><div class="label">Review Time</div><div class="metric">{{ morning.estimated_review_time_minutes }} min</div></div>
+    </div>
+    <a class="button" href="/plans">Review Morning Brief</a>
+</div>
+
+<h2>Executive Impact</h2>
+
+<div class="grid">
+    <div class="card">
+        <div class="label">Capacity Returned</div>
+        <div class="metric">{{ summary.capacity_returned_hours }} hrs</div>
+        <div class="small">Monthly Capacity Goal Per User: {{ summary.monthly_capacity_goal_per_user_hours }} hrs</div>
+        <div class="small">Goal Achievement: {{ summary.capacity_goal_progress_percent }}%</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Compliance Readiness</div>
+        <div class="metric">{{ summary.compliance_score }}%</div>
+        <div class="small">Up {{ summary.compliance_delta }}% since last month</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Administrative Tasks Prepared</div>
+        <div class="metric">{{ morning.admin_requests_prepared }}</div>
+        <div class="small">Routine work organized for review instead of interruption</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Decisions Requiring Review</div>
+        <div class="metric">{{ morning.decisions_required }}</div>
+        <div class="small">Approved plans move into Change Manager</div>
+    </div>
+</div>
+
+<h2>Items Needing Attention</h2>
+
+{% for card in reality_cards %}
+<div class="card">
+    <div class="label">{{ card.category }}</div>
+    <h3>{{ card.title }}</h3>
+    <p>{{ card.discovered_reality }}</p>
+    <p><strong>Severity:</strong>
+        <span class="status-{{ card.severity }}">{{ card.severity|upper }}</span>
+    </p>
+    <p><strong>Current:</strong> {{ card.current_value }} | <strong>Target:</strong> {{ card.target_value }}</p>
+</div>
+{% endfor %}
+
+<h2>Pending Prebuilt Action Plans</h2>
+
+{% for action in action_packs %}
+    {% if action.status == "prepared" %}
+    <div class="card">
+        <div class="label">{{ action.ipe }}</div>
+        <h3>{{ action.title }}</h3>
+        <p>{{ action.summary }}</p>
+        <p><strong>Priority:</strong>
+            <span class="status-{{ action.priority }}">{{ action.priority|upper }}</span>
+        </p>
+        <p><strong>Monthly Capacity Goal Per User:</strong>
+            {{ action.expected_impact.monthly_capacity_goal_per_user_hours }} hours
+        </p>
+        <p><strong>Review Time:</strong> {{ action.review_time_minutes }} minutes</p>
+        <a class="button" href="/plans/{{ action.id }}">Review & Approve</a>
+    </div>
+    {% endif %}
+{% endfor %}
+
+
+<h2>Work Distribution</h2>
+
+<div class="grid-3">
+    {% for category in work.categories %}
+    <div class="card">
+        <div class="label">{{ category.label }}</div>
+        <h2>{{ category.name }}</h2>
+        <div class="metric">{{ category.percent }}%</div>
+        <p><strong>Target:</strong> {{ category.goal }}%</p>
+        <p><strong>Direction:</strong> {{ category.direction }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="card">
+    <div class="label">VANCE Work Doctrine</div>
+    <p class="statement">
+        Find the red work. Simplify the yellow work. Create more room for green work.
+    </p>
+    <a class="button" href="/work">View Work Classification</a>
+</div>
+
+<h2>Capacity Growth Path</h2>
+
+<div class="grid-3">
+    <div class="card">
+        <div class="label">Garden</div>
+        <h2>Up To 40 Hours</h2>
+        <p>Monthly Capacity Goal Per User</p>
+        <p class="small">Recover administrative time, improve compliance readiness, reduce friction, and prepare actions for review.</p>
+    </div>
+
+    <div class="card">
+        <div class="label">Professional</div>
+        <h2>Up To 80 Hours</h2>
+        <p>Monthly Capacity Goal Per User</p>
+        <p class="small">Adds opportunity recovery, recruiting infrastructure, workflow adoption, and expanded executive visibility.</p>
+    </div>
+
+    <div class="card">
+        <div class="label">Executive</div>
+        <h2>Up To 120 Hours</h2>
+        <p>Monthly Capacity Goal Per User</p>
+        <p class="small">Adds continuous improvement cycles, advanced capacity recovery, and executive-level performance monitoring.</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="label">VANCE Mission</div>
+    <p class="statement">{{ summary.commission_neutral_statement }}</p>
+</div>
+
+{% endblock %}

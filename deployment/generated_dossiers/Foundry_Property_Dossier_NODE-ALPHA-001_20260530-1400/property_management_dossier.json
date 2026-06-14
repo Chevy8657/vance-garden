@@ -1,0 +1,16 @@
+{
+  "dossier_version": "1.0",
+  "property_info": {
+    "node_id": "NODE-ALPHA-001",
+    "verification_status": "HIGH_CONFIDENCE"
+  },
+  "evidence_state": {
+    "occupancy_timeline": "MONOTONIC_VERIFIED",
+    "maintenance_events": "CHAIN_INTEGRITY_CONFIRMED",
+    "incident_exceptions": "ZERO_ANOMALIES"
+  },
+  "chain_of_custody": {
+    "ledger_tip": "LATEST_HASH_SHA256",
+    "integrity_score": 1.0
+  }
+}

@@ -1,0 +1,11 @@
+[
+    {
+        "attestation_id": "ATT-6E44506B",
+        "property_id": "PROP-001",
+        "manager_id": "RM-001",
+        "manager_note": "Reviewed and verified.",
+        "signed_at": "2026-05-31T10:10:41.556530+00:00",
+        "dossier_hash": "HASH-999",
+        "status": "CLOSED_ATTESTED"
+    }
+]

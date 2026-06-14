@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ change_manager.title }}</h1>
+<p class="statement">{{ change_manager.subtitle }}</p>
+
+<div class="grid">
+    <div class="card">
+        <div class="label">Pending Review</div>
+        <div class="metric">{{ change_manager.pending_review }}</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Implemented</div>
+        <div class="metric">{{ change_manager.implemented }}</div>
+    </div>
+
+    <div class="card">
+        <div class="label">In Progress</div>
+        <div class="metric">{{ change_manager.in_progress }}</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Awaiting Measurement</div>
+        <div class="metric">{{ change_manager.awaiting_measurement }}</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Completed</div>
+        <div class="metric">{{ change_manager.completed }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="label">Total Capacity Returned Through Managed Change</div>
+    <div class="metric">{{ change_manager.total_capacity_returned_hours }} hrs</div>
+    <p class="small">Every approved action becomes part of the historical improvement record.</p>
+</div>
+
+<h2>Historic Improvement Record</h2>
+
+{% for change in change_manager.changes %}
+<div class="card">
+    <div class="label">{{ change.category }} // {{ change.status|upper }}</div>
+    <h2>{{ change.title }}</h2>
+    <p><strong>Approved:</strong> {{ change.approved_date }}</p>
+    <p><strong>Completed:</strong> {{ change.completed_date }}</p>
+    <p><strong>Before:</strong> {{ change.before_metric }}</p>
+    <p><strong>After:</strong> {{ change.after_metric }}</p>
+    <p><strong>Capacity Returned:</strong> {{ change.capacity_returned_hours }} hrs</p>
+    <p>{{ change.result }}</p>
+</div>
+{% endfor %}
+
+<h2>Capacity Ledger Evidence</h2>
+
+{% for entry in ledger %}
+<div class="card">
+    <div class="label">{{ entry.action_pack_id }}</div>
+    <h2>{{ entry.actual_capacity_returned_hours }} hrs returned</h2>
+    <p><strong>Capacity Goal:</strong> {{ entry.capacity_goal_hours }} hrs</p>
+    <p><strong>Goal Achievement:</strong> {{ entry.goal_achievement_percent }}%</p>
+    <ul>
+        {% for item in entry.evidence %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+{% endblock %}

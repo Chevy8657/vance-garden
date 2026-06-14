@@ -1,0 +1,9 @@
+{
+    "node_id": "NODE-ALPHA-001",
+    "deployment_status": "CERTIFIED",
+    "forensic_chain_tip": "LATEST_VERIFIED_HASH",
+    "readiness_gate": "PASSED",
+    "burn_stability_duration": "72H",
+    "integrity_score": "1.00",
+    "timestamp": "2026-05-29T21:35:00Z"
+}

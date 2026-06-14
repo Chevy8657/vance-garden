@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% set card = action_bundle.reality_card %}
+{% set action = action_bundle.action_pack %}
+
+<h1>Review & Approve</h1>
+
+<div class="card">
+    <div class="label">Discovered Reality</div>
+    <h2>{{ card.title }}</h2>
+    <p>{{ card.discovered_reality }}</p>
+    <p><strong>Severity:</strong>
+        <span class="status-{{ card.severity }}">{{ card.severity|upper }}</span>
+    </p>
+    <p><strong>Affected Group:</strong> {{ card.affected_group }}</p>
+</div>
+
+<div class="card">
+    <div class="label">Action Prepared</div>
+    <h2>{{ action.title }}</h2>
+    <p>{{ action.summary }}</p>
+
+    <h3>Prepared Actions</h3>
+    <ul>
+        {% for item in action.prepared_actions %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Expected Impact</h3>
+    <p><strong>Monthly Capacity Goal Per User:</strong>
+        {{ action.expected_impact.monthly_capacity_goal_per_user_hours }} hours
+    </p>
+    <p><strong>Primary Outcome:</strong> {{ action.expected_impact.primary_outcome }}</p>
+    <p><strong>Review Time:</strong> {{ action.review_time_minutes }} minutes</p>
+
+    <a class="button" href="/approve/{{ action.id }}">Approve Action</a>
+    <a class="button" href="/actions">Return to Actions</a>
+</div>
+{% endblock %}

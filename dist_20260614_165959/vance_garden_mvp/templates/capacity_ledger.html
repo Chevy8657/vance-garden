@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Capacity Ledger</h1>
+
+<div class="card">
+    <div class="label">Monthly Capacity Goal Per User</div>
+    <div class="metric">{{ summary.monthly_capacity_goal_per_user_hours }} hrs</div>
+    <p class="small">
+        Monthly Capacity Goals represent target productivity improvements based on adoption,
+        workflow utilization, and organizational participation. Actual results vary.
+    </p>
+</div>
+
+{% for entry in ledger %}
+<div class="card">
+    <div class="label">{{ entry.action_pack_id }}</div>
+    <h2>{{ entry.actual_capacity_returned_hours }} hrs returned</h2>
+    <p><strong>Capacity Goal:</strong> {{ entry.capacity_goal_hours }} hrs</p>
+    <p><strong>Goal Achievement:</strong> {{ entry.goal_achievement_percent }}%</p>
+    <p><strong>Measurement Period:</strong> {{ entry.measurement_period }}</p>
+    <p><strong>Status:</strong> {{ entry.status }}</p>
+
+    <h3>Evidence</h3>
+    <ul>
+        {% for item in entry.evidence %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+{% endblock %}

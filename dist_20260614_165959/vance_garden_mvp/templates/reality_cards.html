@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Reality Cards</h1>
+<p class="statement">VANCE converts raw operational friction into diagnosed conditions.</p>
+
+{% for card in reality_cards %}
+<div class="card">
+    <div class="label">{{ card.scope }} // {{ card.category }}</div>
+    <h2>{{ card.title }}</h2>
+    <p>{{ card.discovered_reality }}</p>
+    <p><strong>Affected Group:</strong> {{ card.affected_group }}</p>
+    <p><strong>Metric:</strong> {{ card.metric_name }}</p>
+    <p><strong>Current:</strong> {{ card.current_value }} | <strong>Target:</strong> {{ card.target_value }}</p>
+    <p><strong>Severity:</strong>
+        <span class="status-{{ card.severity }}">{{ card.severity|upper }}</span>
+    </p>
+    <p><strong>Source:</strong> {{ card.source }}</p>
+    <p><strong>Status:</strong> {{ card.status }}</p>
+</div>
+{% endfor %}
+{% endblock %}

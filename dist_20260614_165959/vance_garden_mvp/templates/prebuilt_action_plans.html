@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Prebuilt Action Plans</h1>
+<p class="statement">VANCE prepares the plan. You review, approve, or modify. Implemented plans move to Change Manager.</p>
+
+{% for action in action_packs %}
+<div class="card">
+    <div class="label">{{ action.ipe }} // {{ action.status|upper }}</div>
+    <h2>{{ action.title }}</h2>
+    <p>{{ action.summary }}</p>
+
+    <p><strong>Priority:</strong>
+        <span class="status-{{ action.priority }}">{{ action.priority|upper }}</span>
+    </p>
+
+    <p><strong>Monthly Capacity Goal Per User:</strong>
+        {{ action.expected_impact.monthly_capacity_goal_per_user_hours }} hours
+    </p>
+
+    <p><strong>Primary Outcome:</strong> {{ action.expected_impact.primary_outcome }}</p>
+    <p><strong>Review Time:</strong> {{ action.review_time_minutes }} minutes</p>
+
+    {% if action.status == "prepared" %}
+        <a class="button" href="/plans/{{ action.id }}">Review & Approve</a>
+    {% else %}
+        <a class="button" href="/change">View In Change Manager</a>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

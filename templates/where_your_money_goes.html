@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Where Your Money Goes</h1>
+<p class="statement">
+    VANCE shows what clients pay for, what the business is required to operate, and what is leaking money through operational waste.
+</p>
+
+<div class="grid-3">
+    {% for category in work.categories %}
+    <div class="card">
+        <div class="label">
+            {% if category.name == "Value Added" %}
+                Clients Pay For
+            {% elif category.name == "Required By Law" %}
+                Required To Operate
+            {% else %}
+                Operational Waste
+            {% endif %}
+        </div>
+
+        <h2>
+            {% if category.name == "Value Added" %}
+                Clients Pay For
+            {% elif category.name == "Required By Law" %}
+                Required To Operate
+            {% else %}
+                Operational Waste
+            {% endif %}
+        </h2>
+
+        <div class="metric">{{ category.percent }}%</div>
+        <p><strong>Target:</strong> {{ category.goal }}%</p>
+        <p><strong>VANCE Direction:</strong> {{ category.direction }}</p>
+        <p class="small">{{ category.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Top Operational Waste Sources</h2>
+
+<div class="card">
+    <ul>
+        {% for source in work.top_waste_sources %}
+        <li>{{ source }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="card">
+    <div class="label">Recommended Next Action</div>
+    <h2>Administrative Drag Reduction Pack</h2>
+    <p class="statement">
+        VANCE recommends attacking operational waste first by reducing status chasing,
+        duplicate entry, document hunting, rework, and poor coordination.
+    </p>
+    <p><strong>Expected Impact:</strong> +8 Monthly Capacity Goal Hours Per User</p>
+
+    {% if admin_drag_in_change_manager %}
+        <p><strong>Status:</strong> IN CHANGE MANAGER</p>
+        <a class="button" href="/change">View In Change Manager</a>
+    {% else %}
+        <a class="button" href="/plans/AP-003">Review Prebuilt Action Plan</a>
+    {% endif %}
+</div>
+
+<div class="card">
+    <div class="label">VANCE Money Doctrine</div>
+    <p class="statement">
+        Increase what clients pay for. Simplify what is required to operate. Eliminate operational waste.
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Detail</title>
+    <style>
+        body { font-family: Arial, sans-serif; background:#0f172a; color:#e5e7eb; padding:30px; }
+        a { color:#93c5fd; }
+        .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-bottom:20px; }
+        .card { background:#111827; border:1px solid #374151; border-radius:12px; padding:18px; margin-bottom:20px; }
+        .small { color:#9ca3af; font-size:14px; margin-bottom:6px; }
+        .metric { font-size:26px; font-weight:bold; color:#ffffff; }
+        .warning { color:#facc15; font-weight:bold; }
+        .capability { padding:8px 0; border-bottom:1px solid #374151; }
+        .bar { width:100%; background:#374151; height:14px; border-radius:8px; overflow:hidden; margin-top:10px; }
+        .fill { background:#22c55e; height:14px; }
+        ul { margin-top:8px; padding-left:20px; }
+    </style>
+</head>
+<body>
+
+<p><a href="/clients">← Back to Clients</a></p>
+
+<h1>{{ client.brokerage_name }}</h1>
+<p>Client Intelligence Dossier</p>
+
+<div class="grid">
+    <div class="card">
+        <div class="small">Volume</div>
+        <div class="metric">${{ "{:,.0f}".format(client.transaction_volume) }}</div>
+    </div>
+    <div class="card">
+        <div class="small">GCI</div>
+        <div class="metric">${{ "{:,.0f}".format(client.gci) }}</div>
+    </div>
+    <div class="card">
+        <div class="small">Advisors</div>
+        <div class="metric">{{ client.agent_count }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Executive Scorecard</h2>
+    <div class="grid">
+        <div>
+            <div class="small">Self Assessment</div>
+            <div class="metric">{{ executive_scorecard.self_assessment }}</div>
+        </div>
+        <div>
+            <div class="small">VANCE Assessment</div>
+            <div class="metric">{{ executive_scorecard.vance_assessment }}</div>
+        </div>
+        <div>
+            <div class="small">Target Score</div>
+            <div class="metric">{{ executive_scorecard.target_score }}</div>
+        </div>
+        <div>
+            <div class="small">Perception Gap</div>
+            <div class="metric">{{ executive_scorecard.perception_gap }}</div>
+        </div>
+        <div>
+            <div class="small">Goal Gap</div>
+            <div class="metric">{{ executive_scorecard.goal_gap }}</div>
+        </div>
+        <div>
+            <div class="small">Transformation Priority</div>
+            <div class="metric" style="font-size:18px;">{{ executive_scorecard.transformation_priority }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Transformation Timeline</h2>
+    <div class="grid">
+        <div><div class="small">Today</div><div class="metric">{{ timeline.day_0 }}</div></div>
+        <div><div class="small">90 Days</div><div class="metric">{{ timeline.day_90 }}</div></div>
+        <div><div class="small">180 Days</div><div class="metric">{{ timeline.day_180 }}</div></div>
+        <div><div class="small">270 Days</div><div class="metric">{{ timeline.day_270 }}</div></div>
+        <div><div class="small">360 Days</div><div class="metric">{{ timeline.day_360 }}</div></div>
+        <div><div class="small">Destination</div><div class="metric" style="font-size:18px;">{{ timeline.destination }}</div></div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Compliant Node Owner Progress</h2>
+    <div class="grid">
+        <div><div class="small">Current IPE</div><div class="metric">{{ analysis.overall_ipe }}</div></div>
+        <div><div class="small">Target IPE</div><div class="metric">{{ analysis.target_ipe }}</div></div>
+        <div><div class="small">IPE Gap</div><div class="metric">{{ analysis.ipe_gap }}</div></div>
+    </div>
+    <div class="bar"><div class="fill" style="width:{{ analysis.overall_ipe }}%;"></div></div>
+    <p><b>Current Level:</b> {{ analysis.maturity_level }}</p>
+    <p><b>Ultimate Goal:</b> Compliant Node Owner</p>
+</div>
+
+<div class="card">
+    <h2>Revenue Impact Engine</h2>
+    <div class="grid">
+        <div><div class="small">Projected Revenue Lift</div><div class="metric">${{ "{:,.0f}".format(revenue_impact.projected_revenue_lift) }}</div></div>
+        <div><div class="small">Investment</div><div class="metric">${{ "{:,.0f}".format(revenue_impact.investment) }}</div></div>
+        <div><div class="small">ROI</div><div class="metric">{{ revenue_impact.roi_percent }}%</div></div>
+    </div>
+    <div class="grid">
+        <div><div class="small">Payback Period</div><div class="metric">{{ revenue_impact.payback_months }} months</div></div>
+        <div><div class="small">Current IPE</div><div class="metric">{{ revenue_impact.current_ipe }}</div></div>
+        <div><div class="small">Projected IPE</div><div class="metric">{{ revenue_impact.projected_ipe }}</div></div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Program Tracker</h2>
+    <div class="grid">
+        <div><div class="small">Program</div><div class="metric" style="font-size:18px;">{{ program.program }}</div></div>
+        <div><div class="small">Status</div><div class="metric">{{ program.status }}</div></div>
+        <div><div class="small">Completion</div><div class="metric">{{ program.completion }}%</div></div>
+    </div>
+    <div class="bar"><div class="fill" style="width:{{ program.completion }}%;"></div></div>
+    <br>
+    {% for m in program.milestones %}
+        <div class="capability">{% if m.complete %}✓{% else %}□{% endif %} {{ m.name }}</div>
+    {% endfor %}
+</div>
+
+<div class="card">
+    <h2>Verification Engine</h2>
+    <div class="grid">
+        <div><div class="small">Verification Score</div><div class="metric">{{ verification.verification_score }}%</div></div>
+        <div><div class="small">Status</div><div class="metric">{{ verification.status }}</div></div>
+        <div><div class="small">Verified Items</div><div class="metric">{{ verification.verified_items }}/{{ verification.total_items }}</div></div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Certification Engine</h2>
+    <div class="grid">
+        <div><div class="small">Certification Status</div><div class="metric" style="font-size:18px;">{{ certification.status }}</div></div>
+        <div><div class="small">Node Readiness</div><div class="metric">{{ certification.node_readiness }}</div></div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>VANCE Recommendation</h2>
+    <p class="warning">{{ analysis.recommendation }}</p>
+    <p>Weakest Pillar: <b>{{ analysis.weakest_pillar }}</b> — {{ analysis.weakest_score }}/100</p>
+</div>
+
+<div class="card">
+    <h2>Recommended Capabilities</h2>
+    {% for capability in analysis.recommended_capabilities %}
+        <div class="capability">✓ {{ capability }}</div>
+    {% endfor %}
+</div>
+
+<div class="card">
+    <h2>90-Day Client Action Plan</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="small">01 // Days 0–30</div>
+            <ul>{% for item in analysis.action_plan.days_0_30 %}<li>{{ item }}</li>{% endfor %}</ul>
+        </div>
+        <div class="card">
+            <div class="small">02 // Days 31–60</div>
+            <ul>{% for item in analysis.action_plan.days_31_60 %}<li>{{ item }}</li>{% endfor %}</ul>
+        </div>
+        <div class="card">
+            <div class="small">03 // Days 61–90</div>
+            <ul>{% for item in analysis.action_plan.days_61_90 %}<li>{{ item }}</li>{% endfor %}</ul>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>IPE Framework</h2>
+    {% for pillar, score in analysis.ipe_scores.items() %}
+        <div>{{ pillar }}: <span class="metric" style="font-size:16px;">{{ score }}</span></div>
+    {% endfor %}
+</div>
+
+<div class="card">
+    <h2>Pain Point</h2>
+    <p>{{ client.pain_point }}</p>
+    <h2>Strategic Goal</h2>
+    <p>{{ client.business_goal }}</p>
+</div>
+
+</body>
+</html>
